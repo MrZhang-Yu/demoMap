@@ -1,0 +1,199 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>动画demo</title>
+</head>
+
+<body style="background:#1B1B1B">
+
+<div id="mainMap" style="height:100%;width: 100%;background:#1B1B1B;position: absolute;">
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script> 
+<script src="http://echarts.baidu.com/build/dist/echarts.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	$('#document').ready(function(){
+		 getEcharts();
+	 });
+</script>
+
+<script type="text/javascript">
+function getEcharts(){
+
+    require.config({
+        paths: {
+            echarts: './js'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            var myChart2 = ec.init(document.getElementById('mainMap'));
+            myChart2.setOption({
+				dataRange: {
+					min : 0,
+					max : 100,
+					calculable : true,
+					color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+					textStyle:{
+						color:'#fff'
+					}
+				},
+				series : [
+					{
+						name: '全国',
+						type: 'map',
+						roam: true,
+						hoverable: false,
+						mapType: 'china',
+						itemStyle:{
+							normal:{
+								borderColor:'rgba(100,149,237,1)',
+								borderWidth:0.5,
+								areaStyle:{
+									color: '#1b1b1b'
+								}
+							}
+						},
+						data:[],
+						markLine : {
+							smooth:true,
+							symbol: ['none', 'circle'],  
+							symbolSize : 1,
+							itemStyle : {
+								normal: {
+									color:'#fff',
+									borderWidth:1,
+									borderColor:'rgba(30,144,255,0.5)'
+								}
+							},
+							data : [
+							],
+						},
+						geoCoord: {
+							'上海': [121.4648,31.2891],
+							'包头': [110.3467,41.4899],
+							'北京': [116.4551,40.2539],
+							'南宁': [108.479,23.1152],
+							'南昌': [116.0046,28.6633],
+							'大连': [122.2229,39.4409],
+							'常州': [119.4543,31.5582],
+							'广州': [113.5107,23.2196],
+							'拉萨': [91.1865,30.1465],
+							'重庆': [107.7539,30.1904],
+							'长春': [125.8154,44.2584],
+						},
+						markPoint : {
+							symbol:'emptyCircle',
+							symbolSize : function (v){
+								return 10 + v/10
+							},
+							effect : {
+								show: true,
+								shadowBlur : 0
+							},
+							itemStyle:{
+								normal:{
+									label:{show:false}
+								},
+								emphasis: {
+									label:{position:'top'}
+								}
+							},
+							data : [
+								{name:'上海',value:95},
+								{name:'广州',value:90},
+								{name:'大连',value:80},
+								{name:'南宁',value:70},
+								{name:'南昌',value:60},
+								{name:'拉萨',value:50},
+								{name:'长春',value:40},
+								{name:'包头',value:30},
+								{name:'重庆',value:20},
+								{name:'常州',value:10}
+							]
+						}
+					},
+					{
+						name: '北京 Top10',
+						type: 'map',
+						mapType: 'china',
+						data:[],
+						markLine : {
+							smooth:true,
+							effect : {
+								show: true,
+								scaleSize: 1,
+								period: 30,
+								color: '#fff',
+								shadowBlur: 10
+							},
+							itemStyle : {
+								normal: {
+									label:{show:false},
+									borderWidth:1,
+									lineStyle: {
+										type: 'solid',
+										shadowBlur: 10
+									}
+								}
+							},
+							data : [
+								[{name:'上海'}, {name:'北京',value:95}],
+								[{name:'广州'}, {name:'北京',value:90}],
+								[{name:'大连'}, {name:'北京',value:80}],
+								[{name:'南宁'}, {name:'北京',value:70}],
+								[{name:'南昌'}, {name:'北京',value:60}],
+								[{name:'拉萨'}, {name:'北京',value:50}],
+								[{name:'长春'}, {name:'北京',value:40}],
+								[{name:'包头'}, {name:'北京',value:30}],
+								[{name:'重庆'}, {name:'北京',value:20}],
+								[{name:'常州'}, {name:'北京',value:10}]
+							]
+						},
+						markPoint : {
+							symbol:'emptyCircle',
+							symbolSize : function (v){
+								return 0.1
+							},
+							effect : {
+								show: false,
+								shadowBlur : 0
+							},
+							itemStyle:{
+								normal:{
+									label:{show:true,
+										  position:'top',
+										  textStyle: {
+													fontSize: 14
+												}
+										  }
+								},
+								emphasis: {
+									label:{show:false}
+								}
+							},
+							data : [
+								{name:'上海',value:95},
+								{name:'广州',value:90},
+								{name:'大连',value:80},
+								{name:'南宁',value:70},
+								{name:'南昌',value:60},
+								{name:'拉萨',value:50},
+								{name:'长春',value:40},
+								{name:'包头',value:30},
+								{name:'重庆',value:20},
+								{name:'常州',value:10}
+							]
+						}
+					}
+				]
+        });
+	});
+}
+    </script>
+</body>
+</html>
